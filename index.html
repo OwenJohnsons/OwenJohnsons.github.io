@@ -1,915 +1,486 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-	
-	<!--
-		Basic
-	-->
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
-	<title>Owen Johnson</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<meta name="description" content="" />
-	<meta name="keywords" content="personal, card, cv, portfolio" />
-	<meta name="author" content="Owen Johnson" />
-	
-	<!--
-		Load Fonts
-	-->
-	<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=cyrillic" rel="stylesheet">
-	
-	<!--
-		Load CSS
-	-->
-	<link rel="stylesheet" href="css/basic.css" />
-	<link rel="stylesheet" href="css/layout.css" />
-	<link rel="stylesheet" href="css/blogs.css" />
-	<link rel="stylesheet" href="css/line-awesome.css" />
-	<link rel="stylesheet" href="css/magnific-popup.css" />
-	<link rel="stylesheet" href="css/animate.css" />
-	<link rel="stylesheet" href="css/simplebar.css" />
-	
-	<!-- theme colors -->
-	<!-- <link rel="stylesheet" href="css/theme-colors/green.css" /> -->
-	<link rel="stylesheet" href="css/theme-colors/blue.css" />
-	<!--<link rel="stylesheet" href="css/theme-colors/red.css" />-->
-	<!--<link rel="stylesheet" href="css/theme-colors/orange.css" />-->
-	<!--<link rel="stylesheet" href="css/theme-colors/pink.css" />-->
-	<!--<link rel="stylesheet" href="css/theme-colors/purple.css" />-->
-	
-	<!--[if lt IE 9]>
-	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-	
-	<!--
-		Favicons
-	-->
-	<link rel="shortcut icon" href="images/favicons/favicon.ico">
-	
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Owen Johnson — CV Terminal</title>
+  <style>
+    :root{
+      --bg: #050806;
+      --panel: rgba(0,0,0,.35);
+      --green: #38ff7a;
+      --green-dim: rgba(56,255,122,.7);
+      --bright: #d8ffe6;
+      --yellow: #ffd86b;
+      --shadow: rgba(56,255,122,.25);
+      --border: rgba(56,255,122,.20);
+      --border2: rgba(56,255,122,.45);
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin: 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      background: var(--bg);
+      color: var(--green);
+      min-height: 100vh;
+    }
+
+    .terminal-container{
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      padding: 16px;
+    }
+
+    /* CRT overlays */
+    .overlay-scan{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+      background: linear-gradient(transparent 50%, rgba(0,0,0,.12) 50%) 0 0 / 100% 4px;
+      mix-blend-mode: multiply;
+    }
+    .overlay-vignette{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+      background: radial-gradient(transparent 0%, rgba(0,0,0,.35) 100%);
+    }
+    .scanline{
+      position: fixed;
+      left: 0;
+      right: 0;
+      height: 140px;
+      top: -140px;
+      z-index: 11;
+      pointer-events: none;
+      background: linear-gradient(to bottom, rgba(56,255,122,0), rgba(56,255,122,.06), rgba(56,255,122,0));
+      animation: scan 6s linear infinite;
+    }
+    @keyframes scan{
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(calc(100vh + 280px)); }
+    }
+
+    .terminal-window{
+      max-height: 100vh;
+      overflow: auto;
+      padding: 16px;
+      border-radius: 14px;
+      background: var(--panel);
+      box-shadow: 0 0 40px rgba(0,0,0,.45), 0 0 40px var(--shadow);
+      position: relative;
+      z-index: 1;
+    }
+
+    .inner{
+      max-width: 980px;
+      margin: 0 auto;
+      line-height: 1.55;
+      font-size: 14px;
+      text-shadow: 0 0 10px rgba(56,255,122,.25);
+      white-space: pre-wrap;
+    }
+
+    .glow{ text-shadow: 0 0 12px rgba(56,255,122,.35); }
+
+    /* Sticky banner header (permanent) */
+    .sticky-header{
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      padding: 12px 12px 10px;
+      margin: -6px -6px 12px;
+      border-radius: 12px;
+      background: linear-gradient(to bottom, rgba(0,0,0,.65), rgba(0,0,0,.35));
+      border: 1px solid var(--border);
+      backdrop-filter: blur(6px);
+    }
+    .banner{
+      white-space: pre;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    /* Single Run bar */
+    .run-bar{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(0,0,0,.35);
+      border: 1px solid var(--border);
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .hint{
+      color: rgba(216,255,230,.60);
+      font-size: 12px;
+    }
+    button{
+      font: inherit;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.40);
+      color: var(--bright);
+      padding: 10px 14px;
+      outline: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    button:hover{ border-color: var(--border2); }
+    button:focus{ box-shadow: 0 0 0 3px rgba(56,255,122,.15); border-color: var(--border2); }
+    button[disabled]{ opacity: .6; cursor: not-allowed; }
+
+    /* Run animation */
+    .dot{
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 14px rgba(56,255,122,.35);
+      opacity: .9;
+    }
+    .running .dot{
+      animation: throb 650ms ease-in-out infinite;
+    }
+    @keyframes throb{
+      0%,100%{ transform: scale(1); opacity: .65; }
+      50%{ transform: scale(1.8); opacity: 1; }
+    }
+    .running{
+      border-color: var(--border2);
+      box-shadow: 0 0 0 3px rgba(56,255,122,.10);
+    }
+
+    .output{
+      white-space: pre-wrap;
+      min-height: 35vh;
+    }
+
+    /* Optional terminal input row (vibe) */
+    .input-row{
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      gap: 8px;
+      opacity: .85;
+    }
+    .prompt{
+      color: var(--bright);
+      white-space: pre;
+    }
+    .cmd{
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--bright);
+      font: inherit;
+      padding: 0;
+      caret-color: var(--green);
+    }
+
+    /* Small flicker */
+    .flicker{ animation: flicker 6s infinite; }
+    @keyframes flicker{
+      0%, 100% { opacity: 1; }
+      92% { opacity: .98; }
+      94% { opacity: .92; }
+      96% { opacity: .99; }
+      98% { opacity: .95; }
+    }
+
+    @media (min-width: 640px){
+      .terminal-container{ padding: 24px; }
+      .terminal-window{ padding: 24px; }
+      .inner{ font-size: 15px; }
+    }
+  </style>
 </head>
 
 <body>
-	<div class="page">
-		
-		<!--
-			Preloader
-		-->
-		<div class="preloader">
-			<div class="centrize full-width">
-				<div class="vertical-center">
-					<div class="spinner">
-						<div class="double-bounce1"></div>
-						<div class="double-bounce2"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!--
-			Header
-		-->
-		<header class="header">
-
-			<!-- logo -->
-			<div class="logo">
-				<a href="#"><span>	<img src="images/oj_logo_white.png" alt="TCD Logo" height="40" style="vertical-align:middle"> </span></a>
-			</div>
-
-			<!-- menu -->
-			<div class="top-menu">
-				<ul>
-					<li class="active">
-						<a href="#home-card">
-							<span class="icon la la-home"></span>
-							<span class="link">Home</span>
-						</a>
-					</li>
-					<li>
-						<a href="#about-card">
-							<span class="icon la la-user"></span>
-							<span class="link">About</span>
-						</a>
-					</li>
-					<li>
-						<a href="#resume-card">
-							<span class="icon la la-gear"></span>
-							<span class="link">Resume</span>
-						</a>
-					</li>
-					<!-- <li>
-						<a href="#works-card">
-							<span class="icon la la-eye"></span>
-							<span class="link">Portfolio</span>
-						</a>
-					</li> -->
-					<!-- <li>
-						<a href="#blog-card">
-							<span class="icon la la-newspaper-o"></span>
-							<span class="link">Blog</span>
-						</a>
-					</li> -->
-					<li>
-						<a href="#publications-card">
-							<span class="icon la la-newspaper-o"></span>
-							<span class="link">Publications</span>
-						</a>
-					</li>
-					<li>
-						<a href="#contacts-card">
-							<span class="icon la la-envelope"></span>
-							<span class="link">Contacts</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-
-			<!-- Started socials -->
-			<div class="social">
-				<a target="_blank" href="https://www.instagram.com/owen.johnsons/"><span class="icon la la-instagram"></span></a>
-				<a target="_blank" href="https://twitter.com/OwenJoh"><span class="icon la la-twitter"></span></a>
-				<a target="_blank" href="https://github.com/OwenJohnsons"><span class="icon la la-github"></span></a>
-				<!-- <a target="_blank" href="https://stackoverflow.com/"><span class="icon la la-stack-overflow"></span></a> -->
-			</div>
-
-			<!-- Mobile Menu -->
-			<span class="menu-btn">
-				<span class="m-line"></span>
-			</span>
-
-		</header>
-
-		<!--
-			Container
-		-->
-		<div class="container">
-
-			<!--
-				Card - Started
-			-->
-			<div class="card-inner card-started active" id="home-card">
-
-				<!-- Started Background -->
-				<div id="particles-bg" class="slide" style="background-image: url(images/bg.jpg);"></div>
-				
-				<div class="centrize full-width">
-					<div class="vertical-center">
-
-						<!-- Started titles -->
-						<div class="title"><span>Owen</span> Johnson</div>
-						<div class="subtitle">
-							I am 
-							<div class="typing-title">
-								<p>an <strong>astro-physicist.</strong></p>
-								<p>a <strong>vagabond.</strong></p>
-								<p>a <strong>graphic designer.</strong></p>
-								<p>an <strong>astro-photographer.</strong></p>
-							</div>
-							<span class="typed-title"></span>
-						</div>
-						
-					</div>
-				</div>
-
-			</div>
-
-			<!-- 
-				Card - About
-			-->
-			<div class="card-inner" id="about-card">
-				<div class="row card-container">
-
-					<!--
-						Card Wrap
-					-->
-					<div class="card-wrap col col-m-12 col-t-12 col-d-8 col-d-lg-6" data-simplebar>
-						
-						<!-- About Image -->
-						<div class="card-image col col-m-12 col-t-12 col-d-4 col-d-lg-6" style="background-image: url(images/profile.jpg);"></div>
-						
-						<!--
-							Inner Top
-						-->
-						<div class="content inner-top">
-							<div class="row">
-								<div class="col col-m-12 col-t-12 col-d-12 col-d-lg-12">
-									<div class="title-bg">About Me</div>
-									<div class="text">
-										<p>
-											My name is  <strong>Owen.</strong> I am an <strong> Irish </strong> astrophysicist, currently enrolled as a <strong> PhD </strong> researcher at <strong> Trinity College Dublin </strong>, jointly supported by <strong> UC Berkeley </strong> under the supervision of  
-												<a href="https://sites.google.com/site/evankeane/"> Prof. Evan Keane</a> and <a href="https://gajjarv.github.io/mywebsite/"> Dr. Vishal Gajjar </a>
-												 </strong>. My research is based on <strong> transient </strong> astronomical objects using everything from pulsars as gravitational probes to searching large data sets for signs of ET. I am also a associate member of <strong> NANOGrav </strong>.
-										</p>
-										<p>
-											I completed my undergraduate degree in Physics with Astronomy and Space Science at University College Dublin (UCD) in 2022. During this time I worked as a research assistant at <strong>UC Berkeley.</strong> Working primarily using <strong> LOw Frequency ARrays (LOFAR) </strong>  looking for <strong>technosignatures</strong> on targets found by NASA's <strong>Transiting Exoplanet Survey Satellite </strong> (TESS). 
-										</p>	
-										<p> When I am not looking at the transient sky, I like to cycle long distances to take pictures of the stars, go in search of the world with my dad on my NC750 and climb rocks for fun. I am also an avid MotoGP and NBA fan.  Interested in talking about any of my research or other interests, don't hesitate to reach out! 
-										</p>
-									</div>
-									<div class="circle-bts">
-										<a href="/downloads/Owen_Johnson_CV.pdf"><span><i class="icon la la-download"></i>Download CV</span></a>
-										<a href="https://github.com/OwenJohnsons"><i class="icon la la-github"></i></a>
-										<a href="https://www.instagram.com/owen.johnsons/"><i class="icon la la-instagram"></i></a>
-										<a href="https://twitter.com/OwenJoh"><i class="icon la la-twitter"></i></a>
-									</div>
-									<div style="font-size:0">
-									<p> 
-									</br>
-									<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
-										<div style="display: flex; gap: 15px;">
-											<img src="images/Trinity_Main_Logo.png" alt="TCD Logo" height="100">
-											<img src="images/UCB.png" alt="BSRC Logo" height="90">
-										</div>
-										<div style="display: flex; gap: 15px;">
-											<img src="images/BSRClogo.png" alt="TCD Logo" height="90">
-											<img src="images/BL_logo.png" alt="BSRC Logo" height="90">
-										</div>
-										<div>
-											<img src="images/nanograv.png" alt="NANOGrav" height="90" style="vertical-align:middle">
-										</div>
-									</div>
-									</p>
-									</div>
-								</p>
-								</div>
-							</div>
-						</div>
-<!-- 
-						<div class="content fuct">
-							<div class="row">
-								<div class="col col-m-12 col-t-12 col-d-12 col-d-lg-12"> -->
-
-									<!-- title -->
-									<!-- <div class="title">What <span>music</span> I am <span> coding  </span> to! </div>
-									<tr>
-										<td width="100%">
-									<img src="https://spotify-now-playing-sigma-neon.vercel.app/api/spotify?background_color=00000&border_color=00000" alt="Spotify" width="600" style="vertical-align:middle">
-								</div> -->
-						<!-- </div> -->
-						
-						<!--
-							Fun Fact
-						-->
-						<div class="content fuct">
-							<div class="row">
-								<div class="col col-m-12 col-t-12 col-d-12 col-d-lg-12">
-
-									<!-- title -->
-									<div class="title"><span>Fun</span> Facts</div>
-
-								</div>
-							</div>
-
-							<!-- fuct items -->
-							<div class="row fuct-items">
-
-								<!-- fuct item -->
-								<!-- <div class="col col-m-6 col-t-6 col-d-3 col-d-lg-3">
-									<div class="fuct-item card-box">
-										<div class="icon"><i class="la la-headphones"></i></div>
-										<div class="name">1 degree </div>
-									</div>
-								</div> -->
-
-								<!-- fuct item -->
-								<div class="col col-m-6 col-t-6 col-d-3 col-d-lg-3">
-									<div class="fuct-item card-box">
-										<div class="icon"><i class="la la-trophy"></i></div>
-										<div class="name">9 telescopes used</div>
-									</div>
-								</div>
-
-								<!-- fuct item -->
-								<div class="col col-m-6 col-t-6 col-d-3 col-d-lg-3">
-									<div class="fuct-item card-box">
-										<div class="icon"><i class="la la-coffee"></i></div>
-										<div class="name">1000+ coffees consumed</div>
-									</div>
-								</div>
-
-								<!-- fuct item -->
-								<div class="col col-m-6 col-t-6 col-d-3 col-d-lg-3">
-									<div class="fuct-item card-box">
-										<div class="icon"><i class="la la-map"></i></div>
-										<div class="name">15 Countries Visited</div>
-									</div>
-								</div>
-
-								<!-- fuct item -->
-								<!-- <div class="col col-m-6 col-t-6 col-d-3 col-d-lg-3"> -->
-									<!-- <div class="fuct-item card-box">
-										<div class="icon"><i class="la la-book"></i></div>
-										<div class="name">0 Papers Published </div>
-									</div>
-								</div> -->
-
-								<!-- fuct item -->
-								<div class="col col-m-6 col-t-6 col-d-3 col-d-lg-3">
-									<div class="fuct-item card-box">
-										<div class="icon"><i class="la la-code"></i></div>
-										<div class="name">100,000 Lines of Code that failed to compiled</div>
-									</div>
-								</div>
-
-								<!-- fuct item -->
-								<div class="col col-m-6 col-t-6 col-d-3 col-d-lg-3">
-									<div class="fuct-item card-box">
-										<div class="icon"><img src="images/TESS_logo_(transparent_bg).png" height="42" style="vertical-align:middle"></div>
-										<div class="name">44 TESS Targets Observed</div>
-									</div>
-								</div>
-
-								<div class="col col-m-6 col-t-6 col-d-3 col-d-lg-3">
-									<div class="fuct-item card-box">
-										<div class="icon"><img src="images/Logo_Gaia.png" height="48" style="vertical-align:middle"></div>
-										<div class="name">1,600,000+ Gaia Targets Observed</div>
-									</div>
-								</div>
-
-								<!-- fuct item -->
-								<div class="col col-m-6 col-t-6 col-d-3 col-d-lg-3">
-									<div class="fuct-item card-box">
-										<div class="icon"><i class="la la-bicycle"></i></div>
-										<div class="name">5,000+ km Cycled</div>
-									</div>
-								</div>
-
-							</div>
-
-						</div>
-
-
-					</div>
-					
-				</div>
-			</div>
-			</div>
-			<!-- 
-				Card - Resume
-			-->
-			<div class="card-inner" id="resume-card">
-				<div class="row card-container">
-						
-					<!--
-						Card Wrap
-					-->
-					<div class="card-wrap col col-m-12 col-t-12 col-d-8 col-d-lg-6" data-simplebar>
-
-						<!-- Resume Image -->
-						<div class="card-image col col-m-12 col-t-12 col-d-4 col-d-lg-6" style="background-image: url(images/profile2.jpg);"></div>
-
-						<!--
-							Inner Top
-						-->
-						<div class="content inner-top">
-							<div class="row">
-								<div class=" col col-m-12 col-t-12 col-d-12 col-d-lg-12">
-									<div class="title-bg">Resume</div>
-								</div>
-							</div>
-						</div>
-
-						<!--
-							Resume
-						-->
-						<div class="content resume">
-							<div class="row">
-								<div class="col col-m-12 col-t-6 col-d-6 col-d-lg-6">
-
-									<!-- title -->
-									<div class="title"><span>Relevant</span> Experience</div>
-
-									<!-- resume items -->
-									<div class="resume-items card-box">
-
-										<!-- resume item -->
-										<div class="resume-item">
-											<div class="name">Researcher</div>
-											<div class="date"> June, 2024 - August, 2024 <span>|</span> Frontiers Development Lab</div>
-											<p>
-												Working under NASA Goddard's Planetary Environments Laboratory to apply AI/ML to Mass Spectrometer data to test a proof of concept for in-situ analysis for future space missions. 
-											</p>
-										</div>
-
-
-										<div class="resume-item">
-											<div class="name">Research Assistant</div>
-											<div class="date"> May, 2021 - August, 2022 <span>|</span> UC Berkeley SETI Research Center</div>
-											<p>
-												Working as part of the wider SETI and Breakthrough initiative using low frequency radio-astronomy to
-search for evidence of extra-terrestrial life. Developing software and performing observations. Regularly
-presenting and publishing findings. 
-											</p>
-										</div>
-
-										<!-- resume item -->
-										<div class="resume-item">
-											<div class="name">Research Intern</div>
-											<div class="date">Jan, 2021 - May, 2021 <span>|</span> UCD School of Physics </div>
-											<p>
-												Working on a case study that involves the analysis of surveys to inform the write up of research reports
-and the preparation of supporting materials for the incorporation of EDI awareness into physics and
-mathematics teaching and learning practices.
-											</p>
-										</div>
-
-										<!-- resume item -->
-										<!-- <div class="resume-item">
-											<div class="name">Senior Developer</div>
-											<div class="date">2009-2010 <span>|</span> Abc Inc.</div>
-											<p>
-												Optimize website performance using latest technology.
-											</p>
-										</div> -->
-
-									</div>
-								</div>
-								<div class="col col-m-12 col-t-6 col-d-6 col-d-lg-6">
-
-									<!-- title -->
-									<div class="title"><span>My</span> Education</div>
-
-									<!-- resume items -->
-									<div class="resume-items card-box">
-
-										<!-- resume item -->
-										<div class="resume-item">
-											<div class="name">Trinity College Dublin</div>
-											<div class="date">2022-2026 <span>|</span> Dublin, Ireland </div>
-											<p>
-												Doctorate of Philosophy (PhD) in Physics and Astrophysics
-											</p>
-										</div>
-
-										<!-- resume item -->
-										<div class="resume-item">
-											<div class="name">University College Dublin</div>
-											<div class="date">2018-2022 <span>|</span> Dublin, Ireland </div>
-											<p>
-												Bachelor's of Science (BSc. Hons) in Physics with Astronomy and Space Science 
-											</p>
-										</div>
-
-										<!-- resume item -->
-										<div class="resume-item">
-											<div class="name">Arklow CBS</div>
-											<div class="date">2012-2018 <span>|</span> Arklow, Ireland</div>
-											<p>
-												Completed leaving certificate equivalent to a high school diploma. 
-											</p>
-										</div>
-									</div>
-									<br>
-									<div class="title"><span> Other </span> Information</div>
-									<!-- resume items -->
-									<div class="resume-items card-box">
-
-										<!-- resume item -->
-										<div class="resume-item">
-											<div class="name">Citizenships</div>
-											<p>
-												Republic of Ireland (EU) <br>
-												United States of America
-											</p>
-											<div class="name">Licenses</div>
-											<p>
-												Full B & W Class Irish (EU) Driving License <br>
-											</p>
-										</div>
-
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!--
-							Skills
-						-->
-						<div class="content skills">
-							<div class="row">
-								<div class="col col-m-12 col-t-6 col-d-6 col-d-lg-6">
-
-									<!-- title -->
-									<div class="title"><span>Personal</span> Skills</div>
-
-									<!-- skills -->
-									<div class="skills-list card-box">
-										<ul>
-											<li> 
-												<div class="name">Communication</div>
-												<div class="progress">
-													<div class="percentage" style="width:90%;"></div>
-												</div>
-											</li>
-											<li> 
-												<div class="name">Team Work</div>
-												<div class="progress">
-													<div class="percentage" style="width:65%;"></div>
-												</div>
-											</li>
-											<li> 
-												<div class="name">Leadership</div>
-												<div class="progress">
-													<div class="percentage" style="width:75%;"></div>
-												</div>
-											</li>
-											<!-- <li>
-												<div class="name">Language</div>
-												<div class="progress">
-													<div class="percentage" style="width:85%;"></div>
-												</div>
-											</li> -->
-										</ul>
-									</div>
-
-								</div>
-								<div class="col col-m-12 col-t-6 col-d-6 col-d-lg-6">
-
-									<!-- title -->
-									<div class="title"><span>Professional</span> Skills</div>
-
-									<!-- skills -->
-									<div class="skills-list card-box">
-										<ul>
-											<li> 
-												<div class="name">Python</div>
-												<div class="progress">
-													<div class="percentage" style="width:90%;"></div>
-												</div>
-											</li>
-											<li> 
-												<div class="name">Bash</div>
-												<div class="progress">
-													<div class="percentage" style="width:90%;"></div>
-												</div>
-											</li>
-											<li> 
-												<div class="name">LaTeX</div>
-												<div class="progress">
-													<div class="percentage" style="width:90%;"></div>
-												</div>
-											</li>
-											<li> 
-												<div class="name">C</div>
-												<div class="progress">
-													<div class="percentage" style="width:65%;"></div>
-												</div>
-											</li>
-											<li> 
-												<div class="name">CUDA</div>
-												<div class="progress">
-													<div class="percentage" style="width:35%;"></div>
-												</div>
-											</li>
-											<li>
-												<div class="name">Photoshop</div>
-												<div class="progress">
-													<div class="percentage" style="width:85%;"></div>
-												</div>
-											</li>
-											<li>
-												<div class="name">Teaching / Tutoring</div>
-												<div class="progress">
-													<div class="percentage" style="width:95%;"></div>
-												</div>
-											</li>
-										</ul>
-									</div>
-
-								</div>
-							</div>
-						</div>
-
-					</div>
-					
-				</div>
-			</div>
-			<!-- 
-				Card - Contacts
-			-->
-			<div class="card-inner" id="contacts-card">
-				<div class="row card-container">
-					
-					<!--
-						Card Wrap
-					-->
-					<div class="card-wrap col col-m-12 col-t-12 col-d-8 col-d-lg-6"  data-simplebar>
-
-						
-						<div class="card-image col col-m-12 col-t-12 col-d-4 col-d-lg-6" style="background-image: url(images/profile2.jpg);"></div>
-						
-						<!-- Map -->
-						<div class="card-image col col-m-12 col-t-12 col-d-4 col-d-lg-6">
-							<div class="map" id="map"></div>
-						</div>
-							
-						<!--
-							Inner Top
-						-->
-						<div class="content inner-top">
-							<div class="row">
-								<div class="col col-m-12 col-t-12 col-d-12 col-d-lg-12">
-									<div class="title-bg">Contacts</div>
-								</div>
-							</div>
-						</div>
-
-						<!--
-							Contacts Info
-						-->
-						<div class="content contacts-info">
-							<div class="row">
-								<div class="col col-m-12 col-t-12 col-d-12 col-d-lg-12">
-
-									<!-- title -->
-									<div class="title"><span>Get</span> in Touch</div>
-
-								</div>
-							</div>
-
-							<!-- contacts items -->
-							<div class="row contacts-items">
-
-								<!-- contacts item -->
-								<div class="col col-m-12 col-t-6 col-d-6 col-d-lg-6">
-									<div class="contacts-item card-box">
-										<div class="icon"><i class="la la-map-marker"></i></div>
-										<div class="name">Address</div>
-										<p>
-											University of Dublin, Trinity College,  </br>
-											Astrophysics PhD Office 
-											4th Floor, </br>  SNIAM, Main Campus
-											Dublin 2, Ireland.
-										</p>
-									</div>
-								</div>
-
-								<!-- contacts item -->
-								<div class="col col-m-12 col-t-6 col-d-6 col-d-lg-6">
-									<div class="contacts-item card-box">
-										<div class="icon"><i class="la la-at"></i></div>
-										<div class="name">Email</div>
-										<p>
-											ojohnson@tcd.ie </br>
-											owenjohnson@berkeley.edu
-										</p>
-									</div>
-								</div>
-
-								<!-- contacts item -->
-								<div class="col col-m-12 col-t-6 col-d-6 col-d-lg-6">
-									<div class="contacts-item card-box">
-										<div class="icon"><i class="la la-phone"></i></div>
-										<div class="name">Phone</div>
-										<p>
-											(+353) 87 116 0331 </br>
-											<!-- (+1) 510 229 8629 -->
-										</p>
-									</div>
-								</div>
-
-								<!-- contacts item -->
-								<div class="col col-m-12 col-t-6 col-d-6 col-d-lg-6">
-									<div class="contacts-item card-box">
-										<div class="icon"><i class="la la-check-square"></i></div>
-										<div class="name">Socials</div>
-										<p>
-											Twitter: @OwenJoh
-										</p>
-									</div>
-								</div>
-
-							</div>
-
-						</div>
-
-						<!--
-							Contacts Form
-						-->
-						<div class="content contacts-form">
-							<div class="row">
-								<div class="col col-m-12 col-t-12 col-d-12 col-d-lg-12">
-
-									<!-- title -->
-									<div class="title"><span>Contact</span> Form</div>
-
-								</div>
-							</div>
-							<div class="row">
-								<div class="col col-m-12 col-t-12 col-d-12 col-d-lg-12">
-
-									<!-- form -->
-									<div class="contact_form card-box">
-										<form id="cform" method="post">
-											<div class="row">
-												<div class="col col-m-12 col-t-6 col-d-6 col-d-lg-6">
-													<div class="group-val">
-														<input type="text" name="name" placeholder="Full Name" />
-													</div>
-												</div>
-												<div class="col col-m-12 col-t-6 col-d-6 col-d-lg-6">
-													<div class="group-val">
-														<input type="text" name="email" placeholder="Email Address" />
-													</div>
-												</div>
-												<div class="col col-m-12 col-t-12 col-d-12 col-d-lg-12">
-													<div class="group-val">
-														<textarea name="message" placeholder="Your Message"></textarea>
-													</div>
-												</div>
-											</div>
-											<div class="align-left">
-												<a href="#" class="button" onclick="$('#cform').submit(); return false;">
-													<span class="text">Send Message</span>
-													<span class="icon"><i class="la la-arrow-right"></i></span>
-												</a>
-											</div>
-										</form>
-										<div class="alert-success">
-											<p>Thanks, your message is sent successfully.</p>
-										</div>
-									</div>
-
-								</div>
-							</div>
-						</div>
-
-					</div>
-					
-				</div>
-			</div>
-
-			<!-- 
-			Card - Publications
-			-->
-			<div class="card-inner" id="publications-card">
-				<div class="row card-container">
-						
-					<!--
-						Card Wrap
-					-->
-					<div class="card-wrap col col-m-12 col-t-12 col-d-8 col-d-lg-6" data-simplebar>
-						
-						<!-- Blog Image -->
-						<div class="card-image col col-m-12 col-t-12 col-d-4 col-d-lg-6" style="background-image: url(images/profile3.jpg);"></div>
-						
-						<!--
-							Inner Top
-						-->
-						<div class="content inner-top">
-							<div class="row">
-								<div class="col col-m-12 col-t-12 col-d-12 col-d-lg-12">
-									<div class="title-bg">Publications</div>
-								</div>
-							</div>
-						</div>
-
-						<!--
-							Blog
-						-->
-						<div class="content blog">
-							<div class="row">
-								<div class="col col-m-12 col-t-12 col-d-12 col-d-lg-12">
-
-									<!-- title -->
-									<div class="title"><span>Publications</span> </div>
-									<br>
-									
-									<!-- paper items -->
-									<div class="resume-items card-box">
-
-										<!-- resume item -->
-										<div class="resume-item">
-											<div class="name">A Simultaneous Dual-site Technosignature Search Using International LOFAR Stations</div>
-											<div class="date">2023, <a href="https://iopscience.iop.org/article/10.3847/1538-3881/acf9f5#references">The Astronomical Journal</a> <span>|</span> Johnson. O et. al </div>
-											<!-- <p>
-											</p> -->
-										</div>
-
-										<!-- resume item -->
-										<div class="resume-item">
-											<div class="name">Path-finding with the Old Breed: Using the Old Open Clusters of the Milky Way for Galactic
-												Tracing</div>
-											<div class="date">2022 <span>|</span> BSc Thesis </div>
-											<p>
-												Final year project to be submitted as part of BSc to UCD School of Physics. Final paper awarded an A grade. <br>
-											
-													<a href="/downloads/papers/undergrad_thesis.pdf"><span><i class="icon la la-download"></i>Download PDF</span></a>
-												
-											</p>
-										</div>
-								</div>
-								<br>
-								<div class="title"><span>Presentations</span> & <span>Conferences</span> </div>
-								<br>
-								<!-- paper items -->
-								<div class="resume-items card-box">
-									<!-- resume item -->
-									<div class="resume-item">
-										<div class="name"> SETI-LO: A Simultaneous dual-site technosignature search using international LOFAR stations</div>
-										<div class="date">Aug, 2023 <span>|</span> Irish National Astronomy 2023 
-											Meeting</div>
-										<p>
-									
-										</p>
-									</div>
-									<div class="resume-item">
-										<div class="name">Are We Alone? A LOFAR SETI Survey of TESS-Selected Exoplanets</div>
-										<div class="date">Aug, 2021 <span>|</span> Irish National Astronomy
-											Meeting</div>
-										<p>
-											Talk given remotely alongside friend and colleague <a href="https://orcid.org/0000-0001-7060-4852">Ben McKeon</a> (NUIG)
-										</p>
-									</div>
-								</div>
-								<br>
-								<div class="title"><span>Posters</span> </div>
-								<br>
-								<!-- paper items -->
-								<div class="resume-items card-box">
-
-									<!-- resume item -->
-
-									<div class="resume-item">
-										<div class="name">Dual Site SETI Using LOFAR </div>
-										<div class="date">May, 2023 <span>|</span> AbGradCon 23, La Jolla, CA </div>
-										<p>
-											<a href="/downloads/papers/DUAL-SITE-SETI-AbGradCon23.pdf"><span><i class="icon la la-download"></i>Download PDF</span></a>
-										</p>
-									</div>
-									<div class="resume-item">
-										<div class="name">Are we Alone? Simultaneous dual-site SETI with LOFAR </div>
-										<div class="date">Nov, 2022 <span>|</span> IAC XXXIII Winter School </div>
-										<p>
-											<a href="/downloads/papers/Johnson,Owen-SETI_Winter_School_Poster_Landscape.pdf"><span><i class="icon la la-download"></i>Download PDF</span></a>
-										</p>
-									</div>
-
-							</div>
-
-						</div> 
-
-					</div>
-						
-				</div>
-			</div>
-			
-			<!-- 
-				Lines Grid
-			-->
-			<div class="lines-grid">
-				<div class="row">
-					<div class="col col-m-12 col-t-6 col-d-4 col-d-lg-3"></div>
-					<div class="col col-m-12 col-t-6 col-d-4 col-d-lg-3">
-						<div class="lines">
-							<div class="line-1"></div>
-							<div class="line-2" style="animation-delay: 10s;"></div>
-						</div>
-					</div>
-					<div class="col col-m-12 col-t-6 col-d-4 col-d-lg-3">
-						<div class="lines">
-							<div class="line-1"></div>
-						</div>
-					</div>
-					<div class="col col-m-0 col-t-0 col-d-0 col-d-lg-3">
-						<div class="lines">
-							<div class="line-1"></div>
-							<div class="line-2" style="animation-delay: 0s;"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</div>
-	
-	<!--
-		jQuery Scripts
-	-->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery.validate.js"></script>
-	<script src="js/jquery.magnific-popup.js"></script>
-	<script src="js/imagesloaded.pkgd.js"></script>
-	<script src="js/masonry.pkgd.js"></script>
-	<script src="js/masonry-filter.js"></script>
-	<script src="js/simplebar.js"></script>
-	<script src="js/typed.js"></script>
-	<script src="js/particles.js"></script>
-	
-	<!--
-		Google map api
-	-->
-	<!-- <script src="https://maps.google.com/maps/api/js?sensor=True"></script> -->
-	
-	<!--
-		Main Scripts
-	-->
-	<script src="js/scripts.js"></script>
-	<script src="js/particles-setting.js"></script>
-
-
-	<a rel="me" href="https://astrodon.social/@owen">Mastodon</a>
-	
+  <div class="terminal-container flicker">
+    <div class="terminal-window">
+      <div class="inner">
+
+        <!-- Permanent (sticky) banner: "OWEN JOHNSON" (no A) -->
+        <div class="sticky-header">
+          <div class="banner glow" aria-label="Banner">
+ ██████╗ ██╗    ██╗███████╗███╗   ██╗     ██╗ ██████╗ ██╗  ██╗███╗   ██╗███████╗ ██████╗ ███╗   ██╗
+██╔═══██╗██║    ██║██╔════╝████╗  ██║     ██║██╔═══██╗██║  ██║████╗  ██║██╔════╝██╔═══██╗████╗  ██║
+██║   ██║██║ █╗ ██║█████╗  ██╔██╗ ██║     ██║██║   ██║███████║██╔██╗ ██║███████╗██║   ██║██╔██╗ ██║
+██║   ██║██║███╗██║██╔══╝  ██║╚██╗██║     ██║██║   ██║██╔══██║██║╚██╗██║╚════██║██║   ██║██║╚██╗██║
+╚██████╔╝╚███╔███╔╝███████╗██║ ╚████║     ██║╚██████╔╝██║  ██║██║ ╚████║███████║╚██████╔╝██║ ╚████║
+ ╚═════╝  ╚══╝╚══╝ ╚══════╝╚═╝  ╚═══╝     ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═══╝
+          </div>
+        </div>
+
+        <!-- Single Run button -->
+        <div class="run-bar">
+          <button id="runBtn" type="button">
+            <span class="dot" aria-hidden="true"></span>
+            <span id="runLabel">Run</span>
+          </button>
+          <div class="hint" id="statusHint">Press Run to print CV.</div>
+        </div>
+
+        <div id="output" class="output"></div>
+
+        <div class="input-row" aria-hidden="true">
+          <span class="prompt">visitor@owen:~$ </span>
+          <input class="cmd" type="text" disabled />
+        </div>
+
+      </div>
+    </div>
+
+    <div class="overlay-scan" aria-hidden="true"></div>
+    <div class="overlay-vignette" aria-hidden="true"></div>
+    <div class="scanline" aria-hidden="true"></div>
+  </div>
+
+  <script>
+    const output = document.getElementById("output");
+    const runBtn = document.getElementById("runBtn");
+    const runLabel = document.getElementById("runLabel");
+    const statusHint = document.getElementById("statusHint");
+    const terminalWindow = document.querySelector(".terminal-window");
+
+    const PROMPT = "visitor@owen:~$ ";
+
+    // ---- Your CV content (Fallout-terminal-ish formatting) ----
+    // Edit any text here as needed.
+    const CV_TEXT =
+`WELCOME, USER.
+INITIALIZING PERSONAL DOSSIER...
+──────────────────────────────────────────────────────────────────────
+
+> IDENTIFICATION
+NAME: Owen Johnson
+ROLE: PhD Researcher (Physics & Astrophysics)
+AFFILIATION: Trinity College Dublin / UC Berkeley
+THESIS: Exploring the Radio Sky for Natural and Artificial Transient Sources
+ADVISOR: E.F. Keane
+
+> RESEARCH INTERESTS
+- Time-domain astrophysics
+- Radio surveys
+- High performance computing
+- AI/ML pipeline development
+- Space missions & novel instrumentation design
+
+> SELECTED CONFERENCE TALKS
+- Low Frequency’s Place in SETI — Jan 2024 — PSETI Symposium, Penn State (Invited)
+- Technosignatures with NenuFAR — Dec 2023 — Science at Low Frequencies IX, UvA
+- SETI Science at 30–190 MHz — Nov 2023 — BLUK Workshop, SKAO (Invited)
+- Technosignature Science at Low Frequencies — Nov 2023 — NASA Goddard (Invited)
+- Dual Site SETI Searches — 2023 — International Astronautical Congress, Baku
+
+> ACCEPTED OBSERVING PROPOSALS (P.I.)
+- I-LOFAR and LOFAR-SE projects — 500+ hours (Johnson & Keane)
+- Parkes UWL redback pulsar searches — 20 hours (Johnson & Keane)
+- Calar Alto Observatory 1m — 1 night (Johnson & Martin-Carrillo)
+- TESS follow-up with NenuFAR — 5 hours (Johnson & Viou)
+
+> RESEARCH APPOINTMENTS
+- Researcher — Frontiers Development Lab (FDL.AI) — Jun 2024 to Aug 2024
+  • NASA Goddard (Planetary Environments Lab 699): AI/ML optimisation for
+    Mass Spectrometer data products for current & future missions.
+
+- Visiting Researcher — UC Berkeley — Sep 2022 to Aug 2026
+  • Berkeley SETI Research Center:
+    (i) transient identification in Breakthrough Listen archive
+    (ii) novel AI/ML algorithms for processing
+    (iii) commissioning & deployment of GReX all-sky monitor
+
+- Astrophysics Research Assistant — UC Berkeley — May 2021 to Aug 2022
+  • Breakthrough Listen: joint radio-optical survey strategies
+  • FRB/pulsar identification & characterisation in archive data
+
+- Research Intern — University College Dublin — Jan 2021 to May 2021
+  • EDI awareness in STEM teaching & learning: survey analysis & reporting
+
+> RESEARCH SKILLS
+PROGRAMMING: C, CUDA, Python, SQL, Bash, Awk, LaTeX, Julia
+EXPERTISE:
+- LOFAR / Parkes / GBT data analysis
+- Survey & pipeline design; transient detection
+- Dynamic spectra & imaging analysis
+- Backend development & deployment
+- High-performance / GPU computing
+- Radio instrumentation deployment
+- Real-time AI/ML pipeline design & development
+
+> PROFESSIONAL SERVICE
+- Co-supervisor, Breakthrough Listen I-LOFAR interns (2022–Present)
+- NanoGRAV Associate Member (2024–Present)
+- LOC, European Astronomical Society 2025 (2024–2025)
+- Co-organiser, EAS Early Career Researcher’s Session (2023–2024)
+- Co-organiser, TCD Astronomy Dept Talk Series (2022–Present)
+- Chief Observer, LOFAR station IE613 (2022–Present)
+
+> TEACHING
+- High School Intro to Coding — Walton Club (designed curriculum) (2023–24)
+- Third Year Astrophysics Labs — Trinity College Dublin (2022–24)
+- First Year Astrophysics Labs — Trinity College Dublin (2023)
+- First Year Physics Labs — University College Dublin (2022)
+- Intro to LaTeX Charity Workshop — UCD (designed curriculum) (2019)
+- Private Physics & Mathematics Tutoring (2019–23)
+
+> AWARDS
+- UCD President’s Award for Outstanding Leadership (2021)
+- UCD Award: Recognition of Student Achievement in Teaching (2020)
+- Outstanding Leaving Certificate Award (2018)
+- Leaving Certificate Scholarship Award (2018)
+
+> OUTREACH
+- Walton Club Educator (2023–24)
+- "Our Cosmic Address" — talks for students ages 8–12 (2023)
+- Primary/secondary school STEM outreach talks (2018–Present)
+
+> PUBLICATIONS (in order of authorship)
+- Johnson, O.A. , Kozak, S., Ulrich, O., et al. (2025). A LOw Frequency pulsar, FRB, and Technosignature Survey (LOFTS).A&A, in prep
+- Johnson, O.A. , Keane, E.F., McKenna, D.J., et al. (2025). Radio Observations of a Candidate Redback Millisecond Pulsar:1FGL J0523.5-2529. OAJ, manuscript accepted. arXiv:2508.15435
+- Johnson, O.A. , Keane, E.F., Ashe, C.K., et al. (2025). Non-detection of Low-frequency Radio Emission from MTP0015 and MTP044. Research Notes of the American Astronomical Society.
+- Johnson, O.A. , Saxena, A., , Sivasankar, P ., et al. (2024). Leveraging Machine Learning to Interpret and Analyze Mars Spectrometer Data. FDL Technical Reviews 2024.
+- Johnson, O.A ., Gajjar, V ., Keane, E.F., et al. (2023). A Simultaneous Dual-site Technosignature Search Using International LOFAR Stations. AJ. arXiv:2310.15704
+- Susarla, S., Johnson, O.A ., McKenna, D., et al. (2025). Long-term timing results of ecliptic pulsars observed with I-LOFAR. A&A. arXiv:2505.09549
+- Susarla, S., Ferguson, R., Johnson, O.A ., et al. (2025). RRAT-like behaviour of PSR B0656+14 observed with I-LOFAR. A&A. arXiv:2507.04518
+- DeBoer, D., Ashe, C., Johnson, O.A ., et al. (2025). Lunar Farside Technosignature & Transients Telescope (LFT3). White Paper
+- Shila, K.A., Niedbalski, S., Connor, L., Kulkarni, S.R., Johnson, O.A. , et al. (2025). GReX: An Instrument Overview and New
+Upper Limits on the Galactic FRB Population. PASP . arXiv:2504.18680
+- Keane, E.F., Graber, V ., Levin, L., Tan, C.M., Johnson, O.A. , et al. (2025). A Square Kilometre Array Pulsar Census. OAJ, Accepted.
+- Manunza, L., Vendrame, A., Pizzuto, L., Mulas, M., Perez, K.I., Johnson, O.A. , et al. (2025). The first high frequency
+technosignature search survey with the Sardinia Radio Telescope. Acta Astronautica. arXiv:2410.09288
+
+For most complete and up to date publications list see NASA/ADS
+
+> CONTACT
+EMAIL:  ojohnson@tcd.ie
+WEB:    owenjohnson.dev
+
+──────────────────────────────────────────────────────────────────────
+END OF FILE.
+`;
+
+    // ---- Fallout-style output helpers ----
+    let running = false;
+    let cancelToken = { cancelled: false };
+
+    function sleep(ms) {
+      return new Promise(r => setTimeout(r, ms));
+    }
+
+    function scrollToBottom() {
+      terminalWindow.scrollTop = terminalWindow.scrollHeight;
+    }
+
+    async function typeText(text, opts = {}) {
+      const {
+        minDelay = 18,
+        maxDelay = 28,
+        burstEvery = 140,   
+        burstDelay = 4,
+      } = opts;
+
+      for (let i = 0; i < text.length; i++) {
+        if (cancelToken.cancelled) return;
+
+        output.textContent += text[i];
+
+        if (i % 8 === 0) scrollToBottom();
+		  
+        const ch = text[i];
+        if (ch === "\n") {
+          await sleep(18);
+          continue;
+        }
+        if (ch === " ") {
+          await sleep(2);
+          continue;
+        }
+
+        // burst pacing
+        const isBurst = (i % burstEvery === 0 && i !== 0);
+        if (isBurst) {
+          await sleep(burstDelay);
+        } else {
+          const d = Math.floor(minDelay + Math.random() * (maxDelay - minDelay + 1));
+          await sleep(d);
+        }
+      }
+      scrollToBottom();
+    }
+
+    async function bootAndPrintCV() {
+      cancelToken.cancelled = false;
+      running = true;
+
+      runBtn.classList.add("running");
+      runBtn.disabled = true;
+      runLabel.textContent = "Running…";
+      statusHint.textContent = "BOOT SEQUENCE ACTIVE…";
+
+      // clear output + boot animation
+      output.textContent = "";
+      scrollToBottom();
+
+      const boot =
+`${PROMPT}run
+`;
+      await typeText(boot, { minDelay: 2, maxDelay: 8, burstEvery: 80, burstDelay: 1 });
+      await typeText("PLEASE STAND BY\n", { minDelay: 3, maxDelay: 12 });
+      await sleep(200);
+
+      // little “scan” effect
+      const bars = [
+        "[█░░░░░░░░░░░░░░░░░░] 5%\n",
+        "[████░░░░░░░░░░░░░░░] 20%\n",
+        "[████████░░░░░░░░░░░] 40%\n",
+        "[████████████░░░░░░░] 60%\n",
+        "[████████████████░░░] 80%\n",
+        "[████████████████████] 100%\n\n",
+      ];
+      for (const b of bars) {
+        if (cancelToken.cancelled) return;
+        await typeText(b, { minDelay: 1, maxDelay: 4, burstEvery: 60, burstDelay: 1 });
+        await sleep(120);
+      }
+
+      statusHint.textContent = "PRINTING DOSSIER…";
+      await typeText(CV_TEXT, { minDelay: 6, maxDelay: 18, burstEvery: 160, burstDelay: 2 });
+
+      statusHint.textContent = "DONE. Press Run to reprint.";
+      runBtn.classList.remove("running");
+      runBtn.disabled = false;
+      runLabel.textContent = "Run";
+      running = false;
+    }
+
+    // If user clicks while running, cancel and restart (feels snappy)
+    runBtn.addEventListener("click", async () => {
+      if (running) {
+        cancelToken.cancelled = true;
+        await sleep(40);
+        cancelToken = { cancelled: false };
+      }
+      bootAndPrintCV();
+    });
+
+    // Initial idle screen (minimal)
+    output.textContent =
+`ROBCO INDUSTRIES (TM) TERMINAL PROTOCOL
+──────────────────────────────────────────────────────────────────────
+READY.
+`;
+  </script>
 </body>
 </html>
