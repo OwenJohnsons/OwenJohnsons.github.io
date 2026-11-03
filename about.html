@@ -12,9 +12,8 @@ permalink: /about/
   {% endif %}
   <div>
     <p>
-      I'm a {{ p.role }} at {{ p.affiliation }}. I did my PhD in the Astrophysics
-      Group at Trinity College Dublin, with a visiting position at the Berkeley SETI
-      Research Center, UC Berkeley. My thesis, <em>{{ p.education[0].thesis }}</em>,
+      I'm a {{ p.role }} at {{ p.affiliation }}. I did my PhD in the Radio Astronomy
+      Group at Trinity College Dublin, with a visiting position with Breakthrough Listen at UC Berkeley. My thesis, <em>{{ p.education[0].thesis }}</em>,
       was supervised by <a href="{{ p.education[0].advisor_url }}">{{ p.education[0].advisor }}</a>.
     </p>
     <p><a class="button" href="{{ p.cv | relative_url }}">download cv.pdf</a></p>

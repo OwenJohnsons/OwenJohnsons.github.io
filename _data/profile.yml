@@ -1,8 +1,8 @@
-name: Owen Johnson
+name: Owen A. Johnson
 role: Postdoctoral Research Associate
 affiliation: California Institute of Technology (Caltech)
 location: Caltech, Pasadena, CA
-email: ojohnson@tcd.ie
+email: ojohnson "at" caltech.edu
 cv: /downloads/Owen_Johnson_CV.pdf
 headshot: /images/profile.jpg
 
@@ -24,7 +24,7 @@ interests:
 education:
   - degree: PhD, Physics & Astrophysics
     institution: Trinity College Dublin
-    years: 2022–
+    years: 2022–26
     thesis: Exploring the Radio Sky for Natural and Artificial Transient Sources
     advisor: E.F. Keane
     advisor_url: https://sites.google.com/site/evankeane/
