@@ -1,0 +1,72 @@
+# first_author: true puts the paper in the "First author" list.
+# arxiv: ID only (e.g. 2310.15704). url: any other link (journal, PDF).
+
+- authors: Johnson, O.A., Kozak, S., Ulrich, O., et al.
+  year: 2025
+  title: A LOw Frequency pulsar, FRB, and Technosignature Survey (LOFTS)
+  venue: A&A
+  status: in prep
+  first_author: true
+
+- authors: Johnson, O.A., Keane, E.F., McKenna, D.J., et al.
+  year: 2025
+  title: "Radio Observations of a Candidate Redback Millisecond Pulsar: 1FGL J0523.5-2529"
+  venue: OAJ
+  status: accepted
+  arxiv: "2508.15435"
+  first_author: true
+
+- authors: Johnson, O.A., Keane, E.F., Ashe, C.K., et al.
+  year: 2025
+  title: Non-detection of Low-frequency Radio Emission from MTP0015 and MTP044
+  venue: Research Notes of the AAS
+  first_author: true
+
+- authors: Johnson, O.A., Saxena, A., Sivasankar, P., et al.
+  year: 2024
+  title: Leveraging Machine Learning to Interpret and Analyze Mars Spectrometer Data
+  venue: FDL Technical Reviews 2024
+  first_author: true
+
+- authors: Johnson, O.A., Gajjar, V., Keane, E.F., et al.
+  year: 2023
+  title: A Simultaneous Dual-site Technosignature Search Using International LOFAR Stations
+  venue: AJ
+  arxiv: "2310.15704"
+  url: https://iopscience.iop.org/article/10.3847/1538-3881/acf9f5
+  first_author: true
+
+- authors: Susarla, S., Johnson, O.A., McKenna, D., et al.
+  year: 2025
+  title: Long-term timing results of ecliptic pulsars observed with I-LOFAR
+  venue: A&A
+  arxiv: "2505.09549"
+
+- authors: Susarla, S., Ferguson, R., Johnson, O.A., et al.
+  year: 2025
+  title: RRAT-like behaviour of PSR B0656+14 observed with I-LOFAR
+  venue: A&A
+  arxiv: "2507.04518"
+
+- authors: DeBoer, D., Ashe, C., Johnson, O.A., et al.
+  year: 2025
+  title: Lunar Farside Technosignature & Transients Telescope (LFT3)
+  venue: White Paper
+
+- authors: Shila, K.A., Niedbalski, S., Connor, L., Kulkarni, S.R., Johnson, O.A., et al.
+  year: 2025
+  title: "GReX: An Instrument Overview and New Upper Limits on the Galactic FRB Population"
+  venue: PASP
+  arxiv: "2504.18680"
+
+- authors: Keane, E.F., Graber, V., Levin, L., Tan, C.M., Johnson, O.A., et al.
+  year: 2025
+  title: A Square Kilometre Array Pulsar Census
+  venue: OAJ
+  status: accepted
+
+- authors: Manunza, L., Vendrame, A., Pizzuto, L., Mulas, M., Perez, K.I., Johnson, O.A., et al.
+  year: 2025
+  title: The first high frequency technosignature search survey with the Sardinia Radio Telescope
+  venue: Acta Astronautica
+  arxiv: "2410.09288"

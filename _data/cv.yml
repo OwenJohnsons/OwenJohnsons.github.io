@@ -1,0 +1,130 @@
+# Each entry: title, where, when, and optional notes (list of bullet points).
+
+appointments:
+  - title: Postdoctoral Research Associate
+    where: California Institute of Technology (Caltech)
+    when: Present
+  - title: Researcher
+    where: Frontiers Development Lab (FDL.AI)
+    when: Jun 2024 – Aug 2024
+    notes:
+      - "NASA Goddard (Planetary Environments Lab 699): AI/ML optimisation for mass spectrometer data products for current & future missions."
+  - title: Visiting Researcher
+    where: UC Berkeley
+    when: Sep 2022 – Aug 2026
+    notes:
+      - "Berkeley SETI Research Center: transient identification in the Breakthrough Listen archive"
+      - Novel AI/ML algorithms for processing
+      - Commissioning & deployment of the GReX all-sky monitor
+  - title: Astrophysics Research Assistant
+    where: UC Berkeley
+    when: May 2021 – Aug 2022
+    notes:
+      - "Breakthrough Listen: joint radio-optical survey strategies"
+      - FRB/pulsar identification & characterisation in archive data
+  - title: Research Intern
+    where: University College Dublin
+    when: Jan 2021 – May 2021
+    notes:
+      - "EDI awareness in STEM teaching & learning: survey analysis & reporting"
+
+talks:
+  - title: Low Frequency’s Place in SETI
+    where: PSETI Symposium, Penn State
+    when: Jan 2024
+    invited: true
+  - title: Technosignatures with NenuFAR
+    where: Science at Low Frequencies IX, UvA
+    when: Dec 2023
+  - title: SETI Science at 30–190 MHz
+    where: BLUK Workshop, SKAO
+    when: Nov 2023
+    invited: true
+  - title: Technosignature Science at Low Frequencies
+    where: NASA Goddard
+    when: Nov 2023
+    invited: true
+  - title: Dual Site SETI Searches
+    where: International Astronautical Congress, Baku
+    when: "2023"
+
+proposals:
+  - title: I-LOFAR and LOFAR-SE projects
+    amount: 500+ hours
+    with: Johnson & Keane
+  - title: Parkes UWL redback pulsar searches
+    amount: 20 hours
+    with: Johnson & Keane
+  - title: Calar Alto Observatory 1m
+    amount: 1 night
+    with: Johnson & Martin-Carrillo
+  - title: TESS follow-up with NenuFAR
+    amount: 5 hours
+    with: Johnson & Viou
+
+skills:
+  programming: [C, CUDA, Python, SQL, Bash, Awk, LaTeX, Julia]
+  expertise:
+    - LOFAR / Parkes / GBT data analysis
+    - Survey & pipeline design; transient detection
+    - Dynamic spectra & imaging analysis
+    - Backend development & deployment
+    - High-performance / GPU computing
+    - Radio instrumentation deployment
+    - Real-time AI/ML pipeline design & development
+
+service:
+  professional:
+    - title: Co-supervisor, Breakthrough Listen I-LOFAR interns
+      when: 2022–Present
+    - title: NANOGrav Associate Member
+      when: 2024–Present
+    - title: LOC, European Astronomical Society 2025
+      when: 2024–2025
+    - title: Co-organiser, EAS Early Career Researcher’s Session
+      when: 2023–2024
+    - title: Co-organiser, TCD Astronomy Dept Talk Series
+      when: 2022–Present
+    - title: Chief Observer, LOFAR station IE613
+      when: 2022–Present
+  community:
+    - title: Residential Assistant, UCD Estate Services (Volunteer)
+      when: Aug 2021–May 2022
+    - title: Senior Access Leader, UCD Access & Lifelong Learning
+      when: Mar 2019–May 2022
+    - title: Auditor/Chairperson, UCD Science Society (Volunteer)
+      when: May 2020–May 2021
+      notes:
+        - Co-founded the Irish National Science Championship (INSC)
+
+teaching:
+  - title: High School Intro to Coding — Walton Club (designed curriculum)
+    when: 2023–24
+  - title: Third Year Astrophysics Labs — Trinity College Dublin
+    when: 2022–24
+  - title: First Year Astrophysics Labs — Trinity College Dublin
+    when: "2023"
+  - title: First Year Physics Labs — University College Dublin
+    when: "2022"
+  - title: Intro to LaTeX Charity Workshop — UCD (designed curriculum)
+    when: "2019"
+  - title: Private Physics & Mathematics Tutoring
+    when: 2019–23
+
+outreach:
+  - title: Walton Club Educator
+    when: 2023–24
+  - title: "“Our Cosmic Address” — talks for students ages 8–12"
+    when: "2023"
+  - title: Primary/secondary school STEM outreach talks
+    when: 2018–Present
+
+awards:
+  - title: UCD President’s Award for Outstanding Leadership
+    when: "2021"
+  - title: "UCD Award: Recognition of Student Achievement in Teaching"
+    when: "2020"
+  - title: Outstanding Leaving Certificate Award
+    when: "2018"
+  - title: Leaving Certificate Scholarship Award
+    when: "2018"

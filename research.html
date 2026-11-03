@@ -1,0 +1,49 @@
+---
+title: Research
+command: ls research/
+permalink: /research/
+---
+{% assign p = site.data.profile %}
+{% assign cv = site.data.cv %}
+{% assign first = site.data.publications | where: "first_author", true %}
+{% assign others = site.data.publications | where_exp: "pub", "pub.first_author != true" %}
+
+<h2>Interests</h2>
+<ul class="chips">
+  {% for i in p.interests %}<li>{{ i }}</li>{% endfor %}
+</ul>
+
+<h2>Publications</h2>
+<h3>First author</h3>
+<ul class="pubs">
+  {% for pub in first %}{% include publication.html pub=pub %}{% endfor %}
+</ul>
+<h3>Co-author</h3>
+<ul class="pubs">
+  {% for pub in others %}{% include publication.html pub=pub %}{% endfor %}
+</ul>
+{% assign ads = p.links | where: "label", "NASA/ADS" | first %}
+<p class="meta">For the most complete, up-to-date list see <a href="{{ ads.url }}">NASA/ADS</a>.</p>
+
+<h2>Selected talks</h2>
+{% include entries.html items=cv.talks %}
+
+<h2>Observing proposals (P.I.)</h2>
+<ul class="entries">
+  {% for e in cv.proposals %}
+  <li>
+    <span class="when">{{ e.amount }}</span>
+    <span class="what"><strong>{{ e.title }}</strong> — {{ e.with }}</span>
+  </li>
+  {% endfor %}
+</ul>
+
+<h2>Posters &amp; theses</h2>
+<ul class="entries">
+  {% for e in site.data.posters %}
+  <li>
+    <span class="when">pdf</span>
+    <span class="what"><a href="{{ e.url | relative_url }}">{{ e.title }}</a> — {{ e.where }}</span>
+  </li>
+  {% endfor %}
+</ul>

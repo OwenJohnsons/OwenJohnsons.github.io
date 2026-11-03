@@ -1,0 +1,64 @@
+---
+title: About
+command: cat about.txt
+permalink: /about/
+---
+{% assign p = site.data.profile %}
+{% assign cv = site.data.cv %}
+
+<div class="intro">
+  {% if p.headshot %}
+  <img class="headshot" src="{{ p.headshot | relative_url }}" alt="Headshot of {{ p.name }}">
+  {% endif %}
+  <div>
+    <p>
+      I'm a {{ p.role }} at {{ p.affiliation }}. I did my PhD in the Astrophysics
+      Group at Trinity College Dublin, with a visiting position at the Berkeley SETI
+      Research Center, UC Berkeley. My thesis, <em>{{ p.education[0].thesis }}</em>,
+      was supervised by <a href="{{ p.education[0].advisor_url }}">{{ p.education[0].advisor }}</a>.
+    </p>
+    <p><a class="button" href="{{ p.cv | relative_url }}">download cv.pdf</a></p>
+  </div>
+</div>
+
+<h2>Education</h2>
+<ul class="entries">
+  {% for e in p.education %}
+  <li>
+    <span class="when">{{ e.years }}</span>
+    <span class="what">
+      <strong>{{ e.degree }}</strong> — {{ e.institution }}
+      <ul>
+        <li>Thesis: {{ e.thesis }}</li>
+        <li>Advisor: {{ e.advisor }}</li>
+      </ul>
+    </span>
+  </li>
+  {% endfor %}
+</ul>
+
+<h2>Appointments</h2>
+{% include entries.html items=cv.appointments %}
+
+<h2>Skills</h2>
+<ul class="chips">
+  {% for lang in cv.skills.programming %}<li>{{ lang }}</li>{% endfor %}
+</ul>
+<ul>
+  {% for s in cv.skills.expertise %}<li>{{ s }}</li>{% endfor %}
+</ul>
+
+<h2>Teaching</h2>
+{% include entries.html items=cv.teaching %}
+
+<h2>Service</h2>
+<h3>Professional</h3>
+{% include entries.html items=cv.service.professional %}
+<h3>Community</h3>
+{% include entries.html items=cv.service.community %}
+
+<h2>Outreach</h2>
+{% include entries.html items=cv.outreach %}
+
+<h2>Awards</h2>
+{% include entries.html items=cv.awards %}

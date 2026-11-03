@@ -1,0 +1,35 @@
+name: Owen Johnson
+role: Postdoctoral Research Associate
+affiliation: California Institute of Technology (Caltech)
+location: Caltech, Pasadena, CA
+email: ojohnson@tcd.ie
+cv: /downloads/Owen_Johnson_CV.pdf
+headshot: /images/profile.jpg
+
+links:
+  - label: GitHub
+    url: https://github.com/OwenJohnsons
+  - label: ORCID
+    url: https://orcid.org/0000-0001-7060-4852
+  - label: NASA/ADS
+    url: https://ui.adsabs.harvard.edu/search/q=author%3A%22Johnson%2C%20Owen%20A.%22
+
+interests:
+  - Time-domain astrophysics
+  - Radio surveys
+  - High performance computing
+  - AI/ML pipeline development
+  - Space missions & novel instrumentation design
+
+education:
+  - degree: PhD, Physics & Astrophysics
+    institution: Trinity College Dublin
+    years: 2022–
+    thesis: Exploring the Radio Sky for Natural and Artificial Transient Sources
+    advisor: E.F. Keane
+    advisor_url: https://sites.google.com/site/evankeane/
+  - degree: BSc (Hons.), Physics with Astronomy & Space Science
+    institution: University College Dublin
+    years: 2018–22
+    thesis: Using the Old Open Clusters for Galactic Tracing
+    advisor: A. Martin-Carrillo

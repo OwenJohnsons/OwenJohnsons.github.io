@@ -1,0 +1,31 @@
+title: Owen Johnson
+description: PhD candidate in radio astrophysics at Trinity College Dublin — transients, pulsars, FRBs and technosignatures.
+url: https://owenjohnson.dev
+author: Owen Johnson
+
+permalink: /blog/:year/:month/:title/
+markdown: kramdown
+excerpt_separator: <!--more-->
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+nav:
+  - { label: home, url: / }
+  - { label: about, url: /about/ }
+  - { label: research, url: /research/ }
+  - { label: blog, url: /blog/ }
+  - { label: contact, url: /contact/ }
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+  - scope: { path: "" }
+    values: { layout: page }
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor

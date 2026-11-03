@@ -1,0 +1,9 @@
+{% assign p = include.pub %}
+<li>
+  <span class="authors">{{ p.authors | replace: 'Johnson, O.A.', '<strong>Johnson, O.A.</strong>' }}</span>
+  ({{ p.year }}).
+  <span class="title">{{ p.title }}</span>.
+  <em>{{ p.venue }}</em>{% if p.status %} <span class="tag">{{ p.status }}</span>{% endif %}
+  {% if p.arxiv %}<a href="https://arxiv.org/abs/{{ p.arxiv }}">[arXiv:{{ p.arxiv }}]</a>{% endif %}
+  {% if p.url %}<a href="{{ p.url | relative_url }}">[link]</a>{% endif %}
+</li>

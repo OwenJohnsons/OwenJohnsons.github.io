@@ -1,0 +1,12 @@
+{% comment %} Renders a list of CV entries: include entries.html items=site.data.cv.talks {% endcomment %}
+<ul class="entries">
+  {% for e in include.items %}
+  <li>
+    <span class="when">{{ e.when }}</span>
+    <span class="what">
+      <strong>{{ e.title }}</strong>{% if e.where %} — {{ e.where }}{% endif %}{% if e.invited %} <span class="tag">invited</span>{% endif %}
+      {% if e.notes %}<ul>{% for n in e.notes %}<li>{{ n }}</li>{% endfor %}</ul>{% endif %}
+    </span>
+  </li>
+  {% endfor %}
+</ul>
